@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="border p-4 shadow-lg">
                 <div class="bg-success text-white p-3 mb-3">
-                    <h4 class="mb-0 text-center">Schedule an Appointment</h4>
+                    <h4 class="mb-0 text-center">Create Schedule for "{{ $firm['firm_name'] }}"</h4>
                 </div>
                 <div>
                     <form action="" method="POST">

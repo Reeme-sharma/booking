@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Firm;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        return "i am schedule index";
     }
 
     /**
@@ -20,7 +21,12 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        if($firm_id=request('firm_id'))
+        {
+            $firm=Firm::find($firm_id);
+         return view('schedule_form',compact('firm'));
+        }
+        return abort('419');
     }
 
     /**

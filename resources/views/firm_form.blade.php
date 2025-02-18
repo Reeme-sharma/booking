@@ -1,9 +1,7 @@
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
- <div class="container mt-5">
+<x-app-layout>
+    
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
              <div class="p-4 border rounded shadow-lg bg-light ">
@@ -11,18 +9,18 @@
                     <h3 class="mb-1">Register Your Firm</h3>
                 </div>
                 <div class="mt-3">                
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="/firm" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Firm Name -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Firm Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="firm_name" placeholder="Enter Firm Name" required>
+                            <input type="text" class="form-control" name="firm_name" placeholder="--Firm Name--" required>
                         </div>
 
                         <!-- Mobile Number -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mobile Number <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" name="firm_mobile" placeholder="Enter Mobile Number" required>
+                            <input type="tel" class="form-control" name="firm_mobile" placeholder="--Mobile Number--" required>
                         </div>
 
                          <!-- since -->
@@ -100,10 +98,10 @@
                          </div>
 
                           <!-- Map -->
-                          <div class="mb-3">
+                          {{-- <div class="mb-3">
                             <label class="form-label fw-bold">Map</label>
                             <input type="url" class="form-control" name="map" placeholder="Enter Map URL">
-                        </div>
+                        </div> --}}
 
                          <!-- Map with google map -->
                          {{-- <div class="mb-3">
@@ -113,10 +111,10 @@
                         
 
                         <!-- Profile Picture -->
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label fw-bold">Upload Profile Picture</label>
                             <input type="file" class="form-control" name="profilepic">
-                        </div>
+                        </div> --}}
 
                         <!-- Submit Button -->
                         <div class="mt-4 text-center">
@@ -128,4 +126,5 @@
             </div>
         </div>
     </div>
+</x-app-layout>
 

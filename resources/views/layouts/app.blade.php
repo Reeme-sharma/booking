@@ -9,10 +9,46 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+       <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            .main-container {
+                flex-direction: row; 
+            }
+            .firm-container1 {
+                max-width: 300px;
+                box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+            }
+            .firm-container1 h5{
+                 color:teal;
+            }
+            .firm-container2 {
+                box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+                margin-left: 240px;
+                min-height:100vh;
+            }
+            .profile-pic {
+                     width: 180px;
+                    height: 180px;
+                    box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.3);
+            }
+            .firm-card {
+                    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            }
+            .firm-info {
+                    flex: 1;
+                    min-width: 250px;
+            }
+            </style>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
