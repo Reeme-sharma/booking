@@ -11,12 +11,13 @@
                     <h4 class="mb-0 text-center">Create Schedule for "{{ $firm['firm_name'] }}"</h4>
                 </div>
                 <div>
-                    <form action="" method="POST">
+                    <form action="/schedule" method="POST">
                         @csrf
+                        <input type="hidden" value="{{$firm->id}}" name="firm_id">
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Select a Day <span class="text-danger">*</span></label>
-                            <select class="form-select" name="week" required>
-                                <option value="">-- Select Day --</option>
+                            <label class="form-label fw-bold">Select Day(s) <span class="text-danger">*</span><small class="text-muted">(Press ctrl for multiple selection of same schedule)</small></label>
+                            <select class="form-select" style="min-height:180px" name="week[]" multiple required>
+                                {{-- <option value="">-- Select Day --</option> --}}
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
                                 <option value="Wednesday">Wednesday</option>

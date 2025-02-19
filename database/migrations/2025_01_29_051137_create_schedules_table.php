@@ -14,10 +14,11 @@ return new class extends Migration
             Schema::create('schedules', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('firm_id');
-                $table->string('week',['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']);
+                $table->unsignedBigInteger('user_id');
+                $table->enum('week',['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']);
                 $table->enum('shift',['Morning','Evening','Full Day'])->nullable();
-                $table->string('start_from',15);
-                $table->string('end_from',15);
+                $table->string('start_from');
+                $table->string('end_from');
                 $table->integer('max_appointment');
                 $table->timestamps();
                 $table->foreign('firm_id')->references('id')->on('firms')->onDelete('cascade');

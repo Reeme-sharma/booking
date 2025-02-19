@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Firm;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -34,7 +35,19 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach($request->week as $week)
+        {
+        $detail=[
+            'user_id'=>Auth::user()->id,
+            'firm_id'=>$request->firm_id,
+            'week'=>$week,
+            'shift'=>$request->shift,
+            'start_from'=>$request->start_from,
+            'end_from'=>$request->end_from,
+            'max_appointment'=>$request->max_appointment
+        ];
+        Schedule::create($detail);
+    }
     }
 
     /**

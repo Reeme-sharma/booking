@@ -32,8 +32,8 @@
             }
             .firm-container2 {
                 box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-                margin-left: 240px;
                 min-height:100vh;
+            
             }
             .profile-pic {
                      width: 180px;

@@ -50,7 +50,8 @@ class FirmController extends Controller
             'user_id'=>Auth::user()->id
         ];
         Firm::create($info);
-        return redirect()->route('firm_index')->with('success', 'Firm registered successfully!');
+        return redirect()->route('firm')->with('success', 'Firm registered successfully!');
+    //firm/index/id=1
 
     }
 
