@@ -29,7 +29,7 @@
                             <div class="firm-info">
                                 <h5 class="mb-4 text-uppercase"><b>{{$firm['firm_name']}}</b></h5>
                                 <p><strong>Mobile:</strong> {{$firm['firm_mobile']}}</p>
-                                <p><strong>Address:</strong> {{$firm['address'] }}, {{ $firm['pincode'] }}, {{ $firm['street'] }}, {{ $firm['landmark'] }}, {{ $firm['city'] }}, {{ $firm['state'] }}</p>
+                                <p><strong>Address:</strong> {{$firm['address'] }}, {{ $firm['pincode'] }}, {{ $firm['street'] }}, {{ $firm['landmark'] }}, {{ $firm['city'] }}, {{ $firm['state'] }}, {{ $firm['country'] }}</p>
                                 <p><strong>Since:</strong> {{$firm['since']}}</p>
                                 <p><strong>PAN No:</strong> {{$firm['pan_no']}}</p>
                                 <p><strong>GST No:</strong> {{$firm['gst_no']}}</p>
