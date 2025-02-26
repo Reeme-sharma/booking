@@ -51,7 +51,6 @@ class FirmController extends Controller
         ];
         Firm::create($info);
         return redirect()->route('firm')->with('success', 'Firm registered successfully!');
-    //firm/index/id=1
 
     }
 
@@ -85,5 +84,21 @@ class FirmController extends Controller
     public function destroy(Firm $firm)
     {
         //
+    }
+
+    public function updateprofilepic()
+    {
+        $firmid = request('id');
+        $fileobj = request('profilepic');
+        $filename = time()."_".$fileobj->getClientOriginalName();
+        $fileobj->move('./image',$filename);
+        $firm = Firm::find($firmid);
+        if($firm->profilepic)
+        {
+            unlink('./image/'.$firm->profilepic);
+        }
+        $firm->profilepic = $filename;
+        $firm->save();
+        return redirect('/firm');
     }
 }

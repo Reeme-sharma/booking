@@ -8,7 +8,8 @@
 
         <div class="firm-container2 bg-white w-100 p-4 rounded overflow-auto flex-3">
             @foreach ($info as $index => $firm)
-                <ul class="nav nav-tabs" id="firmTabs-{{ $index }}">
+            <div class="main shadow-lg rounded p-3 mb-3">
+                <ul class="nav nav-tabs w-100 position-relative " id="firmTabs-{{ $index }}">
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#firm-{{ $index }}">Firm</a>
                     </li>
@@ -18,13 +19,28 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#map-{{ $index }}">Map</a>
                     </li>
-                </ul>
+                    <li class="nav-item">
+                        <a class="nav-link sch-tab" data-bs-toggle="tab" href="#schedule-{{ $index }}">Schedule</a>
+                    </li>
+                   
+                <h5 class="position-absolute top-0 end-0 m-2 text-uppercase text-secondary text" >{{ $firm['firm_name'] }}</h5>
+                 
+                 </ul>
+                
 
                 <div class="tab-content mt-3">
                     <div id="firm-{{ $index }}" class="tab-pane fade show active">
                         <div class="firm-card gap-4 d-flex align-items-center p-4 rounded bg-white mb-4 position-relative flex-wrap">
                             <div class="profile-pic">
-                                <img class="w-100 h-100 overflow-hidden" src="..\image\second firm.png" alt="Profile Picture" class="img-fluid">
+                                <img class="w-100 h-100 overflow-hidden" src="/image/{{ $firm->profilepic ? $firm->profilepic : 'not found.jpg' }}" alt="Profile Picture" class="img-fluid">
+                                <div class="mt-4 text-center">
+                                    <form action="updateprofilepic" method="POST" enctype="multipart/form-data" id="frm_{{ $index }}">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $firm->id }}">
+                                    <label for="profilepic" class="link active text-primary cursor-pointer" title="upload profile picture">{{ $firm['profilepic'] ? 'Edit' : 'Upload' }} Image</label>
+                                    <input type="file" name="profilepic" onchange="document.getElementById('frm_{{ $index }}').submit()" class="d-none" id="profilepic" accept="image/*">
+                                    </form>
+                                </div>
                             </div>
                             <div class="firm-info">
                                 <h5 class="mb-4 text-uppercase"><b>{{$firm['firm_name']}}</b></h5>
@@ -48,8 +64,33 @@
                     <div id="map-{{ $index }}" class="tab-pane fade">
                         <p>Map content for {{ $firm['firm_name'] }}...</p>
                     </div>
+
+                    <div id="schedule-{{ $index }}" class="tab-pane fade">
+                        @livewireStyles
+                        @livewire('schedule-l', ['firm' => $firm])
+                        @livewireScripts
+                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>
 </x-app-layout>
+<script>
+$(document).ready(function()
+ {
+    $('.text').hide(); 
+    $('.sch-tab').click(function()
+     {
+        $(this).closest('.main').find('.text').show();
+    });
+
+    $('.nav-link').not('.sch-tab').click(function() 
+    {
+        $(this).closest('.main').find('.text').hide();
+    });
+
+});
+
+</script>    
+

@@ -25,7 +25,9 @@ Route::resource('/schedules',ScheduleController::class)->middleware('auth');
 Route::middleware('auth')->group(function ()
  {
     Route::resource('/firm',FirmController::class)->middleware(SP::class);
+    Route::post('/updateprofilepic',[FirmController::class,'updateprofilepic'])->middleware(SP::class);
     Route::resource('/schedule',ScheduleController::class)->middleware(SP::class);
+
     
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
