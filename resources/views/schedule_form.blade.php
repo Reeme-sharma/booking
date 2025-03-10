@@ -13,7 +13,7 @@
                 <div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Select Day(s) <span class="text-danger">*</span><small class="text-muted">(Press ctrl for multiple selection of same schedule)</small></label>
-                            <select class="form-select" style="min-height:180px" wire:model.live="week[]" multiple required>
+                            <select class="form-select" style="min-height:180px" wire:model.live="week" multiple required>
                                 {{-- <option value="">-- Select Day --</option> --}}
                                 <option value="Monday">Monday</option>
                                 <option value="Tuesday">Tuesday</option>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="mb-3 text-center">
-                            <button wire:click="store" class="bg-green-500 text-white px-4 py-2">Save</button>
+                            <button wire:click="store" class="btn btn-success text-white px-4 py-2">Save</button>
                             <button wire:click="closeModal" class="bg-gray-500 text-white px-4 py-2">Cancel</button>
                         </div>
                     </form>

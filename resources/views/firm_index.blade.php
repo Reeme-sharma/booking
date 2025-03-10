@@ -8,22 +8,22 @@
 
         <div class="firm-container2 bg-white w-100 p-4 rounded overflow-auto flex-3">
             @foreach ($info as $index => $firm)
-            <div class="main shadow-lg rounded p-3 mb-3">
+            <div class="shadow-lg rounded p-3 mb-3">
                 <ul class="nav nav-tabs w-100 position-relative " id="firmTabs-{{ $index }}">
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#firm-{{ $index }}">Firm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#slot-{{ $index }}">Slot</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#Today-Schedule-{{ $index }}">Today Schedule</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#map-{{ $index }}">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link sch-tab" data-bs-toggle="tab" href="#schedule-{{ $index }}">Schedule</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#schedule-{{ $index }}">Schedule</a>
                     </li>
                    
-                <h5 class="position-absolute top-0 end-0 m-2 text-uppercase text-secondary text" >{{ $firm['firm_name'] }}</h5>
+                <h5 class="position-absolute top-0 end-0 m-2 text-uppercase text-secondary" >{{ $firm['firm_name'] }}</h5>
                  
                  </ul>
                 
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="firm-info">
-                                <h5 class="mb-4 text-uppercase"><b>{{$firm['firm_name']}}</b></h5>
+                                {{-- <h5 class="mb-4 text-uppercase"><b>{{$firm['firm_name']}}</b></h5> --}}
                                 <p><strong>Mobile:</strong> {{$firm['firm_mobile']}}</p>
                                 <p><strong>Address:</strong> {{$firm['address'] }}, {{ $firm['pincode'] }}, {{ $firm['street'] }}, {{ $firm['landmark'] }}, {{ $firm['city'] }}, {{ $firm['state'] }}, {{ $firm['country'] }}</p>
                                 <p><strong>Since:</strong> {{$firm['since']}}</p>
@@ -57,8 +57,10 @@
                         </div>
                     </div>
 
-                    <div id="slot-{{ $index }}" class="tab-pane fade">
-                        <p>Slot-related content for {{ $firm['firm_name'] }}...</p>
+                    <div id="Today-Schedule-{{ $index }}" class="tab-pane fade">
+                        {{-- @livewireStyles --}}
+                        @livewire('today-schedule', ['firm' => $firm])
+                        {{-- @livewireScripts --}}
                     </div>
 
                     <div id="map-{{ $index }}" class="tab-pane fade">
@@ -66,31 +68,14 @@
                     </div>
 
                     <div id="schedule-{{ $index }}" class="tab-pane fade">
-                        @livewireStyles
+                        {{-- @livewireStyles --}}
                         @livewire('schedule-l', ['firm' => $firm])
-                        @livewireScripts
+                        {{-- @livewireScripts --}}
                      </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-</x-app-layout>
-<script>
-$(document).ready(function()
- {
-    $('.text').hide(); 
-    $('.sch-tab').click(function()
-     {
-        $(this).closest('.main').find('.text').show();
-    });
-
-    $('.nav-link').not('.sch-tab').click(function() 
-    {
-        $(this).closest('.main').find('.text').hide();
-    });
-
-});
-
-</script>    
+</x-app-layout>    
 

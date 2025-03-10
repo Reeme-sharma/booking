@@ -58,7 +58,7 @@ class PostCrud extends Component
     public function edit($id)
     {
         $post = post::find($id);
-        $this->post_id = $post->id;
+        $this->post_id = $post->id; 
         $this->title = $post->title;
         $this->content = $post->content;
 

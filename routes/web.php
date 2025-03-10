@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\SP;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,17 @@ Route::get('/dashboard',function(){
      switch($user->getRoleNames()[0])
      {
         case 'admin':return "ye admin wala hai";
-        case 'client':return "ye client wala hai";
+        case 'client':
+            if(count($user->getinformation)>0)
+            {
+                return app(CustomerController::class)->index();
+                
+            }
+            else
+            {
+                return app(CustomerController::class)->create();
+                
+            }
         case 'service_provider':
             if(count($user->firm)>0)
                   return app(FirmController::class)->index();

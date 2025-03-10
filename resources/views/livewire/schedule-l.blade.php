@@ -16,19 +16,21 @@
                     <th class="border p-2">Start From</th>
                     <th class="border p-2">End From</th>
                     <th class="border p-2">Maximum Booking</th>
-                    <th class="border p-2">Actions</th>
+                    <th class="border p-2">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($allschedule as $info)
-                    <tr>
+                <tr wire:key="schedule-{{ $info['id'] }}">
                         <td class="border p-2">{{ $loop->iteration }}</td>
                         <td class="border p-2">{{ $info['week'] }}</td>
                         <td class="border p-2">{{ $info['shift'] }}</td>
                         <td class="border p-2">{{ $info['start_from'] }}</td>
                         <td class="border p-2">{{ $info['end_from'] }}</td>
                         <td class="border p-2">{{ $info['max_appointment'] }}</td>
-                        <td class="border p-2">Actions</td>
+                        <td class="border p-2">
+                        <button wire:click="delete({{ $info['id'] }})" class="btn btn-danger">Delete</button>
+                        </td>
                     </tr>
                 @endforeach
                 @if (!count($allschedule))
@@ -44,3 +46,4 @@
     @endif
 
 </div>
+
