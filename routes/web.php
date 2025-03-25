@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirmController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UserInterfaceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,17 +37,10 @@ Route::get('/dashboard',function(){
      switch($user->getRoleNames()[0])
      {
         case 'admin':return "ye admin wala hai";
+
         case 'client':
-            if(count($user->getinformation)>0)
-            {
-                return app(::class)->index();
+                return app(UserInterfaceController::class)->show();
                 
-            }
-            else
-            {
-                return app(::class)->create();
-                
-            }
         case 'service_provider':
             if(count($user->firm)>0)
                   return app(FirmController::class)->index();
