@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\SP;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,20 +17,17 @@ Route::get('/', function () {
 
 Route::resource('/schedules',ScheduleController::class)->middleware('auth');
 
-// Route::get('/detail', function () {
-//     return view('firm_details');
-// });
-
-
 Route::middleware('auth')->group(function ()
  {
     Route::resource('/firm',FirmController::class)->middleware(SP::class);
+    // Route::get('/firm',[FirmController::class,'edit'])->middleware(SP::class)->name('firm_edit');
+    // Route::post('/firm',[FirmController::class,'update'])->middleware(SP::class);
+
+    Route::patch('/firm/mapupdate/{id}',[FirmController::class,'mapupdate'])->middleware(SP::class);
     Route::post('/updateprofilepic',[FirmController::class,'updateprofilepic'])->middleware(SP::class);
     Route::resource('/schedule',ScheduleController::class)->middleware(SP::class);
 
-    
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -43,12 +39,12 @@ Route::get('/dashboard',function(){
         case 'client':
             if(count($user->getinformation)>0)
             {
-                return app(CustomerController::class)->index();
+                return app(::class)->index();
                 
             }
             else
             {
-                return app(CustomerController::class)->create();
+                return app(::class)->create();
                 
             }
         case 'service_provider':

@@ -15,4 +15,10 @@ class Schedule extends Model
         'end_from',
         'max_appointment'
     ];
+
+    public function is_today_schedule()
+    {
+        $data = $this->hasMany(TodaySchedule::class);
+        return $data;
+    }
 }

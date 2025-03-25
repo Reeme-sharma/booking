@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Livewire;
-
 use Livewire\Component;
 use App\Models\Schedule as Sc;
 use Illuminate\Support\Facades\Auth;

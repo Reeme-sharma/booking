@@ -54,6 +54,15 @@ class FirmController extends Controller
 
     }
 
+    function mapupdate(string $id)
+    {
+        $frm = Firm::find($id);
+        $frm->latitude = request('latitude');
+        $frm->longitude = request('longitude');
+        $frm->save();
+        return redirect('/firm');
+    }
+
     /**
      * Display the specified resource.
      */
@@ -65,9 +74,9 @@ class FirmController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Firm $firm)
+    public function edit(Firm $firm_id)
     {
-        //
+        return view('firm_edit',compact('firm_id'));
     }
 
     /**
@@ -75,7 +84,26 @@ class FirmController extends Controller
      */
     public function update(Request $request, Firm $firm)
     {
-        //
+        $info=[
+            'firm_name'=>$request->firm_name,
+            'firm_mobile'=>$request->firm_mobile,
+            'pincode'=>$request->pincode,
+            'since'=>$request->since,
+            'street'=>$request->street,
+            'landmark'=>$request->landmark,
+            'address'=>$request->address,
+            'city'=>$request->city,
+            'state'=>$request->state,
+            'country'=>$request->country,
+            'pan_no'=>$request->pan_no,
+            // 'map'=>$request->map,
+            'register_no'=>$request->register_no,
+            'gst_no'=>$request->gst_no,
+            // 'prpfilepic'=>$request->profilepic,
+            'user_id'=>Auth::user()->id
+        ];
+        $firm->update($info);
+        return redirect()->route('firm')->with('success', 'Firm updated successfully!');
     }
 
     /**

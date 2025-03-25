@@ -21,11 +21,27 @@
                     <td class="border p-2">{{ $info['end_from'] }}</td>
                     <td class="border p-2">{{ $info['max_appointment'] }}</td>
                     <td class="border p-2">
-                    <div class="form-check form-switch">
+
+                        @php
+                            $istodayschedule = false;
+                            $tdsid = null;
+                            $tds = $info->is_today_schedule->toArray();
+                            foreach($tds as $tdinfo)
+                            {
+                                if($tdinfo['todaydate']== date('Y-m-d'))
+                                {
+                                    $tdsid = $tdinfo['id'];
+                                  $istodayschedule = true;
+                                  break;
+                                }
+                            }
+                        @endphp
+
+                    {{-- <div class="form-check form-switch"> --}}
                     <input class="form-check-input" type="checkbox" id="switch-{{ $info['id'] }}"
-                     wire:click="{{ $info->is_today_schedule ? 'delete('.$info->id.')' : 'store('.$info->id.')' }}"
-                     {{ $info->is_today_schedule ? 'checked' : '' }}>
-                    </div>
+                     wire:click="{{ $istodayschedule ? 'delete('.$tdsid.')' : 'store('.$info->id.')' }}"
+                     {{ $istodayschedule ? 'checked' : '' }}>
+                    {{-- </div> --}}
                     </td>
                 </tr>
             @endforeach

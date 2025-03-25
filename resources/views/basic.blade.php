@@ -1,1 +1,0 @@
-ye basic client ka view hai.
