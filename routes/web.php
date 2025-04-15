@@ -20,9 +20,9 @@ Route::resource('/schedules',ScheduleController::class)->middleware('auth');
 
 Route::middleware('auth')->group(function ()
  {
+    Route::get('/show',[UserInterfaceController::class,'show']);
     Route::resource('/firm',FirmController::class)->middleware(SP::class);
-    // Route::get('/firm',[FirmController::class,'edit'])->middleware(SP::class)->name('firm_edit');
-    // Route::post('/firm',[FirmController::class,'update'])->middleware(SP::class);
+    Route::post('/firm',[FirmController::class,'update'])->middleware(SP::class)->name('firm');
 
     Route::patch('/firm/mapupdate/{id}',[FirmController::class,'mapupdate'])->middleware(SP::class);
     Route::post('/updateprofilepic',[FirmController::class,'updateprofilepic'])->middleware(SP::class);

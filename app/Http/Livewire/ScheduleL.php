@@ -78,5 +78,6 @@ class ScheduleL extends Component
         $this->end_from = null;
         $this->max_appointment = null;
     }
+    
 
 }

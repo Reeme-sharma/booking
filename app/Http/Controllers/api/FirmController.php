@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
 use App\Models\Firm;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class FirmController extends Controller
 {
@@ -12,18 +12,16 @@ class FirmController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Fetch all firms related to the logged-in user
-    $info = Auth::user()->firm;
-    // Pass the firms to the view
-    return view('firm_index', compact('info'));
-}
+    {
+        return response(['data'=>Firm::all()],200);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view("firm_form");
+        //
     }
 
     /**
@@ -33,8 +31,6 @@ class FirmController extends Controller
     {
         $info=[
             'firm_name'=>$request->firm_name,
-            'category'=>$request->category,
-            'about_us'=>$request->about_us,
             'firm_mobile'=>$request->firm_mobile,
             'pincode'=>$request->pincode,
             'since'=>$request->since,
@@ -49,48 +45,35 @@ class FirmController extends Controller
             'register_no'=>$request->register_no,
             'gst_no'=>$request->gst_no,
             // 'prpfilepic'=>$request->profilepic,
-            'user_id'=>Auth::user()->id
+            'user_id'=>2
         ];
         Firm::create($info);
-        return redirect()->route('firm')->with('success', 'Firm registered successfully!');
-
-    }
-
-    function mapupdate(string $id)
-    {
-        $frm = Firm::find($id);
-        $frm->latitude = request('latitude');
-        $frm->longitude = request('longitude');
-        $frm->save();
-        return redirect('/firm');
+        return response(['data'=>'done'],200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Firm $firm)
+    public function show(string $id)
     {
-        
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-         $firm = Firm::find($id);
-          return view('firm_form', ['data' => $firm]);
+        return response(['data'=>Firm::find($id)],200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Firm $firm)
+    public function update(Request $request, string $id)
     {
         $info=[
             'firm_name'=>$request->firm_name,
-            'category'=>$request->category,
-            'about_us'=>$request->about_us,
             'firm_mobile'=>$request->firm_mobile,
             'pincode'=>$request->pincode,
             'since'=>$request->since,
@@ -105,33 +88,19 @@ class FirmController extends Controller
             'register_no'=>$request->register_no,
             'gst_no'=>$request->gst_no,
             // 'prpfilepic'=>$request->profilepic,
-            'user_id'=>Auth::user()->id
+            'user_id'=>2
         ];
-        $firm->update($info);
-        return redirect()->route('firm');
+        Firm::updateOrCreate(['id'=>$id],$info);
+        return response(['data'=>'done'],200);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Firm $firm)
+    public function destroy(string $id)
     {
-        //
-    }
-
-    public function updateprofilepic()
-    {
-        $firmid = request('id');
-        $fileobj = request('profilepic');
-        $filename = time()."_".$fileobj->getClientOriginalName();
-        $fileobj->move('./image',$filename);
-        $firm = Firm::find($firmid);
-        if($firm->profilepic)
-        {
-            unlink('./image/'.$firm->profilepic);
-        }
-        $firm->profilepic = $filename;
-        $firm->save();
-        return redirect('/firm');
+        Firm::find($id)->delete();
+        return response(['data'=>'done'],200);
     }
 }

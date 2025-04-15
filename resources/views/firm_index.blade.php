@@ -44,17 +44,18 @@
                             </div>
                             <div class="firm-info">
                                 {{-- <h5 class="mb-4 text-uppercase"><b>{{$firm['firm_name']}}</b></h5> --}}
+                                <p><strong>Category:</strong> {{$firm['category']}}</p>
                                 <p><strong>Mobile:</strong> {{$firm['firm_mobile']}}</p>
+                                <p><strong>About us:</strong> {{$firm['about_us']}}</p>
                                 <p><strong>Address:</strong> {{$firm['address'] }}, {{ $firm['pincode'] }}, {{ $firm['street'] }}, {{ $firm['landmark'] }}, {{ $firm['city'] }}, {{ $firm['state'] }}, {{ $firm['country'] }}</p>
                                 <p><strong>Since:</strong> {{$firm['since']}}</p>
                                 <p><strong>PAN No:</strong> {{$firm['pan_no']}}</p>
                                 <p><strong>GST No:</strong> {{$firm['gst_no']}}</p>
                                 <p><strong>Register No:</strong> {{$firm['register_no']}}</p>
                             </div>
-                            {{-- <button class="btn btn-primary position-absolute top-0 end-0 m-2"> --}}
-                                {{-- <a href="{{ route('firm_edit') }}" class="text-white text-decoration-none">Edit</a> --}}
-                            {{-- </button> --}}
-                        <button wire:click="$emit('editFirm', {{ $firm->id }})" class="btn btn-primary bg-yellow-500 text-white px-2 py-1">Edit</button>
+                             <button class="btn btn-primary position-absolute top-0 end-0 m-2">
+                            <a href="{{ route('firm.edit', $firm->id) }}" class="text-white">Edit</a>
+                            </button> 
                         </div>
                     </div>
 
