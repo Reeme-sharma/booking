@@ -1,5 +1,4 @@
 <div>
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
     <table class="w-full mt-4 border">
         <thead>

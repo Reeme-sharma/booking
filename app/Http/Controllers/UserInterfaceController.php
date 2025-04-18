@@ -23,7 +23,9 @@ class UserInterfaceController extends Controller
 
             });
         })->get();
-        // dd($data);
+    
+        //dd($data);
         return view("userinterface.show",compact('data'));
     }
+
 }

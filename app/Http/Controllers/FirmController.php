@@ -48,7 +48,7 @@ class FirmController extends Controller
             // 'map'=>$request->map,
             'register_no'=>$request->register_no,
             'gst_no'=>$request->gst_no,
-            // 'prpfilepic'=>$request->profilepic,
+            // 'profilepic'=>$request->profilepic,
             'user_id'=>Auth::user()->id
         ];
         Firm::create($info);
@@ -104,7 +104,7 @@ class FirmController extends Controller
             // 'map'=>$request->map,
             'register_no'=>$request->register_no,
             'gst_no'=>$request->gst_no,
-            // 'prpfilepic'=>$request->profilepic,
+            // 'prfilepic'=>$request->profilepic,
             'user_id'=>Auth::user()->id
         ];
         $firm->update($info);

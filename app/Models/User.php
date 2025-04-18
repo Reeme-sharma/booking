@@ -52,8 +52,4 @@ class User extends Authenticatable
         return $this->hasMany(Firm::class);
     }
 
-    public function getinformation()
-    {
-        return $this->hasMany(Customer::class);
-    }
 }
