@@ -22,11 +22,17 @@
                         </div>
 
                         <!--Firm Type-->
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Category <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="category" value="{{ $data->category ?? '' }}" placeholder="--Category--" required>
-                        </div>
+                    <div class="mb-3">
+                     <label class="form-label fw-bold">Category <span class="text-danger">*<span></label>
+                     <input list="categoryList" name="category" class="form-control" value="{{ isset($data) ? $data->category : '' }}">
+                           <datalist id="categoryList">
+                              @foreach($categories as $cat)
+                                 <option value="{{ $cat }}">
+                              @endforeach
+                           </datalist>
 
+                          </div>
+                          
                         <!-- Mobile Number -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mobile Number <span class="text-danger">*</span></label>

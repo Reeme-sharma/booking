@@ -7,6 +7,7 @@ use App\Http\Controllers\FirmController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserInterfaceController;
+use App\Http\Controllers\UserSlotController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +22,7 @@ Route::resource('/schedules',ScheduleController::class)->middleware('auth');
 Route::middleware('auth')->group(function ()
  {
     Route::get('/show',[UserInterfaceController::class,'show']);
+    Route::resource('/userslot',UserSlotController::class);
     Route::resource('/firm',FirmController::class)->middleware(SP::class);
     Route::post('/firm',[FirmController::class,'update'])->middleware(SP::class)->name('firm');
 

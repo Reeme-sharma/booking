@@ -32,28 +32,27 @@ class FirmController extends Controller
     public function store(Request $request)
     {
         $info=[
-            'firm_name'=>$request->firm_name,
+            'firm_name'=>$request->firm_name, 
             'category'=>$request->category,
             'about_us'=>$request->about_us,
-            'firm_mobile'=>$request->firm_mobile,
-            'pincode'=>$request->pincode,
-            'since'=>$request->since,
-            'street'=>$request->street,
-            'landmark'=>$request->landmark,
-            'address'=>$request->address,
-            'city'=>$request->city,
-            'state'=>$request->state,
-            'country'=>$request->country,
-            'pan_no'=>$request->pan_no,
-            // 'map'=>$request->map,
-            'register_no'=>$request->register_no,
-            'gst_no'=>$request->gst_no,
-            // 'profilepic'=>$request->profilepic,
+            'gst_no'=>$request->gst_no, 
+            'register_no'=>$request->register_no, 
+            // 'map'=>$request->map, 
+            'pan_no'=>$request->pan_no, 
+            'country'=>$request->country, 
+            'state'=>$request->state, 
+            'city'=>$request->city, 
+            'address'=>$request->address, 
+            'landmark'=>$request->landmark, 
+            'street'=>$request->street, 
+            'since'=>$request->since, 
+            'pincode'=>$request->pincode, 
+            'firm_mobile'=>$request->firm_mobile, 
             'user_id'=>Auth::user()->id
         ];
         Firm::create($info);
-        return redirect()->route('firm')->with('success', 'Firm registered successfully!');
-
+        $categories = Firm::distinct()->pluck('category');
+        return view("firm_form", compact('categories'));
     }
 
     function mapupdate(string $id)
@@ -78,8 +77,9 @@ class FirmController extends Controller
      */
     public function edit($id)
     {
-         $firm = Firm::find($id);
-          return view('firm_form', ['data' => $firm]);
+        $firm = Firm::find($id);
+        $categories = Firm::distinct()->pluck('category');
+        return view('firm_form', ['data' => $firm, 'categories' => $categories]);
     }
 
     /**
@@ -108,7 +108,9 @@ class FirmController extends Controller
             'user_id'=>Auth::user()->id
         ];
         $firm->update($info);
-        return redirect()->route('firm');
+        $categories = Firm::distinct()->pluck('category');
+        return view("firm_form", ['data' => $firm, 'categories' => $categories]);
+        // return redirect()->route('firm');
     }
 
     /**

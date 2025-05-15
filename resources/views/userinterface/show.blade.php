@@ -40,7 +40,8 @@
         <th class="border p-2">Start From</th>
         <th class="border p-2">End From</th>
         <th class="border p-2">Maximum Booking</th>
-        <th class="border p-2">Remaining</th>
+        <th class="border p-2">Remaining Booking</th>
+        <th class="border p-2">Timing</th>
         <th class="border p-2">Book</th>
       </tr>
       </thead>
@@ -60,12 +61,21 @@
         <td class="border p-2">{{ $info->schedule['start_from'] }}</td>
         <td class="border p-2">{{ $info->schedule['end_from'] }}</td>
         <td class="border p-2">{{ $info->schedule['max_appointment'] }}</td>
+        <td>{{ $rb=$info->schedule['max_appointment']-count($info->userslot) }}</td>
         <td class="border p-2">
-          {{ date('H:i A') }}
-          <input type="time" min="{{ date('H:i')}}">
+          @if($rb>0)
+          <form action="/userslot" method="POST">
+          @csrf
+          <input type="hidden" name="todayschedule_id" value="{{ $info['id'] }}">
+          <input type="time" name="time" min="{{ date('H:i')}}" required>
+          <button class="d-none" id="b{{ $info['id'] }}">Book Appointment</button>
+          </form>
+          @else
+          <span class="text-danger">All Slots are Booked!</span>
+          @endif
         </td>
         <td class="border p-2">
-        <button class="btn btn-primary btn-sm">Book Appointment</button>
+        <label for="b{{ $info['id'] }}" class="btn btn-success" {{ ($rb<=0)?"disable":"" }}>{{ ($rb<=0)?"N/A":"Book Now" }}</label>
         </td>
       </tr>
      @endif

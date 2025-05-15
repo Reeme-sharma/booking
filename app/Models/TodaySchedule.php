@@ -11,4 +11,9 @@ class TodaySchedule extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
+
+    public function userslot()
+    {
+        return $this->hasMany(UserSlot::class,'todayschedule_id');
+    }
 }

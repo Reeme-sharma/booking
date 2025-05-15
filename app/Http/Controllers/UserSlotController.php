@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserSlot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserSlotController extends Controller
 {
@@ -12,7 +13,8 @@ class UserSlotController extends Controller
      */
     public function index()
     {
-        //
+       $data = UserSlot::where('user_id',Auth::user()->id)->orderBy('date','desc')->get();
+       return view("userslot.index",compact('data'));
     }
 
     /**
@@ -28,7 +30,20 @@ class UserSlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $info = UserSlot::where('todayschedule_id', $request->todayschedule_id)->latest()->first();
+        $next = ($info['slotno'] ?? 0) + 1;
+        $info = [
+            'todayschedule_id' => $request->todayschedule_id,
+            'user_id' => $user->id,
+            'username' => $user->name,
+            'mobileno' => $user->mobile,
+            'slotno' => $next,
+            'time' => $request->time,
+            'date' => date('Y-m-d')
+        ];
+        UserSlot::create($info);
+        return redirect("/userslot");
     }
 
     /**
@@ -58,8 +73,10 @@ class UserSlotController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserSlot $userSlot)
+    public function destroy(string $id)
     {
-        //
+        $userSlot = UserSlot::find($id);
+        $userSlot->delete();
+        return redirect("/userslot");
     }
 }

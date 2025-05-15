@@ -21,4 +21,10 @@ class Schedule extends Model
         $data = $this->hasMany(TodaySchedule::class);
         return $data;
     }
+
+    public function firm()
+    {
+        $data = $this->belongsTo(Firm::class);
+        return $data;
+    }
 }
